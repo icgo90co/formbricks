@@ -56,6 +56,11 @@ jobs:
           cache-to: type=gha,mode=max
           build-args: |
             NODE_OPTIONS=--max_old_space_size=8192
+          secrets: |
+            database_url=postgresql://postgres:postgres@postgres:5432/formbricks?schema=public
+            encryption_key=${{ secrets.ENCRYPTION_KEY || 'dummy-encryption-key-for-build' }}
+            redis_url=redis://redis:6379
+            sentry_auth_token=${{ secrets.SENTRY_AUTH_TOKEN || 'dummy-sentry-token' }}
 
       - name: Image pushed successfully
         run: |
